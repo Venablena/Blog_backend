@@ -6,6 +6,12 @@ function getAll (req, res, next) {
   res.json(data)
 }
 
+function create (req, res, next) {
+  const data = model.create(req.body)
+  res.status(201).json(data)
+}
+
 module.exports = {
-  getAll
+  getAll,
+  create
 }
