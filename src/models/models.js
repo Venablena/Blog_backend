@@ -14,11 +14,9 @@ function getAll() {
 function create(post){
   const id = uuid()
   const newPost = {id, ...post}
-  //const data = JSON.stringify(newPost)
   const oldPosts = readDB(filePath)
   const postArray = [...oldPosts]
   postArray.push(newPost)
-  console.log(postArray);
   writeDB(filePath, postArray)
   return JSON.stringify(newPost)
 }
