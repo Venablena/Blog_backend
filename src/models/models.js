@@ -13,17 +13,6 @@ function getAll() {
 
 function create(post){
   const id = uuid()
-<<<<<<< HEAD
-  const newPost = {id, post}
-  writeDB(filePath, newPost)
-  console.log(newPost);
-  return newPost
-}
-
-function show() {
-}
-
-=======
   const newPost = {id, ...post}
   //const data = JSON.stringify(newPost)
   const oldPosts = readDB(filePath)
@@ -34,7 +23,6 @@ function show() {
   return JSON.stringify(newPost)
 }
 
->>>>>>> just_in_case
 /////HELPER FUNCTIONS/////
 function readDB(text){
   const post = JSON.parse(fs.readFileSync(text, 'utf-8'))
@@ -42,17 +30,7 @@ function readDB(text){
 }
 
 function writeDB(path, text){
-<<<<<<< HEAD
-  return JSON.stringify(fs.writeFileSync(path, text))
-}
-
-function findId(id, text){
-  return text.find(item => {
-    return item.id === id
-  })
-=======
   return fs.writeFileSync(path, JSON.stringify(text))
->>>>>>> just_in_case
 }
 
 // function generateSnippets(data){
