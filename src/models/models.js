@@ -6,19 +6,22 @@ const filePath = path.join(__dirname, '../assets/db_posts.json')
 
 const uuid = require('uuid/v4')
 
+////CRUD FUNCTIONS/////
+function getAll() {
+  return readDB(filePath)
+}
+
 function create(post){
   const id = uuid()
   const newPost = {id, post}
-  const data = JSON.stringify(newPost)
-  writeDB(filePath, data)
-  return data
+  writeDB(filePath, newPost)
+  console.log(newPost);
+  return newPost
 }
 
-////ROUTER FUNCTIONS/////
-function getAll() {
-  return readDB(filePath)
-  //return generateSnippets(data)
+function show() {
 }
+
 /////HELPER FUNCTIONS/////
 function readDB(text){
   const post = JSON.parse(fs.readFileSync(text, 'utf-8'))
@@ -26,7 +29,13 @@ function readDB(text){
 }
 
 function writeDB(path, text){
-  return fs.writeFileSync(path, text)
+  return JSON.stringify(fs.writeFileSync(path, text))
+}
+
+function findId(id, text){
+  return text.find(item => {
+    return item.id === id
+  })
 }
 
 // function generateSnippets(data){
@@ -38,5 +47,6 @@ function writeDB(path, text){
 // }
 ///////EXPORTS////////
 module.exports = {
-  getAll
+  getAll,
+  create
 }
