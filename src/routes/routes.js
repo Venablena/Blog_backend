@@ -6,8 +6,7 @@ const ctrl = require('../controllers/controllers')
 router.get('/', ctrl.getAll)
 router.post('/', ctrl.create)
 router.get('/:id', ctrl.getOne)
-//ctrl.findId,
-// router.put('/:id', ctrl.update)
+router.put('/:id', ctrl.update)
 router.delete('/:id', ctrl.destroy)
 
 module.exports = router

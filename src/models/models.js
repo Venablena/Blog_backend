@@ -4,26 +4,23 @@ const fs = require('fs')
 
 const filePath = path.join(__dirname, '../assets/db_posts.json')
 let allPosts = readDB(filePath)
+
 const uuid = require('uuid/v4')
 
 ////CRUD FUNCTIONS/////
-function getAll() {
-  //return readDB(filePath)
-  return allPosts
+function getAll(){
+  return allPosts.reverse()
 }
 
 function create(post){
   const id = uuid()
   const newPost = {id, ...post}
-  //const oldPosts = readDB(filePath)
-  //const postArray = [...allPosts]
   allPosts.push(newPost)
-  writeDB(filePath, allPosts)
+  writeDB(allPosts)
   return JSON.stringify(newPost)
 }
 
 function getOne(id){
-  //const allPosts = readDB(filePath)
   return allPosts.find(post => {
     return post.id === id
   })
@@ -32,7 +29,16 @@ function getOne(id){
 function destroy(id){
   const postToDelete = getOne(id)
   allPosts.splice(allPosts.indexOf(postToDelete), 1)
-  return writeDB(filePath, allPosts)
+  writeDB(allPosts)
+  return postToDelete
+}
+
+function update(id, body){
+  const postToUpdate = getOne(id)
+  const index = allPosts.indexOf(postToUpdate)
+  allPosts[index] = {id, title: body.title, content: body.content}
+  writeDB(allPosts)
+  return allPosts[index]
 }
 
 /////HELPER FUNCTIONS/////
@@ -41,8 +47,8 @@ function readDB(text){
   return post
 }
 
-function writeDB(path, text){
-  return fs.writeFileSync(path, JSON.stringify(text))
+function writeDB(text){
+  return fs.writeFileSync(filePath, JSON.stringify(text))
 }
 
 ///////EXPORTS////////
@@ -50,5 +56,6 @@ module.exports = {
   getAll,
   create,
   getOne,
-  destroy
+  destroy,
+  update
 }
