@@ -11,7 +11,25 @@ function create (req, res, next) {
   res.status(201).json(data)
 }
 
+function getOne (req, res, next) {
+  const data = model.getOne(req.params.id)
+  res.json(data)
+}
+
+function findId(req, res, next) {
+  Request.show(req.params.id).then(id => {
+    if (!id) {
+      const status = 404
+      const message = `There is no entry with id: ${req.params.id}`
+      return next({ status, message })
+    }
+    return next()
+  })
+}
+
 module.exports = {
   getAll,
-  create
+  create,
+  getOne,
+  findId
 }
