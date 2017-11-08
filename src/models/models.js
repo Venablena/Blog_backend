@@ -16,9 +16,9 @@ function create(post){
   const id = uuid()
   const newPost = {id, ...post}
   //const oldPosts = readDB(filePath)
-  const postArray = [...allPosts]
-  postArray.push(newPost)
-  writeDB(filePath, postArray)
+  //const postArray = [...allPosts]
+  allPosts.push(newPost)
+  writeDB(filePath, allPosts)
   return JSON.stringify(newPost)
 }
 
