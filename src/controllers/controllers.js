@@ -16,6 +16,11 @@ function getOne (req, res, next) {
   res.json(data)
 }
 
+function destroy (req, res, next) {
+  const data = model.destroy(req.params.id)
+  res.json(data)
+}
+
 function findId(req, res, next) {
   Request.show(req.params.id).then(id => {
     if (!id) {
@@ -31,5 +36,6 @@ module.exports = {
   getAll,
   create,
   getOne,
+  destroy,
   findId
 }
