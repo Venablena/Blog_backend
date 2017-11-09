@@ -9,7 +9,7 @@ const uuid = require('uuid/v4')
 
 ////CRUD FUNCTIONS/////
 function getAll(){
-  return allPosts.reverse()
+  return allPosts
 }
 
 function create(post){
